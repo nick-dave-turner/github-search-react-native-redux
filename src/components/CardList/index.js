@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import Card from "../Card";
+import Loading from "../Loading";
 
 type Props = {
   data: Array<{ id: string, ...mixed }>,
@@ -25,6 +26,10 @@ export default class CardList extends React.Component<Props> {
   };
 
   render() {
+    if (this.props.loading && !this.props.data.length) {
+      return <Loading />;
+    }
+
     return (
       <View style={styles.cardContainer}>
         <FlatList

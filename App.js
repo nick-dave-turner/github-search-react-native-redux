@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
 import Root from "./src/app";
+import Loading from './src/components/Loading';
 
 export default class App extends React.Component {
 
@@ -18,32 +18,17 @@ export default class App extends React.Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf")
     });
-    this.setState({ isReady: true });
+    window.setTimeout(() => {
+      this.setState({ isReady: true });
+    }, 1000);
   }
 
   render() {
     if (!this.state.isReady) {
-      return (
-        <View style={styles.container}>
-          <Text style={styles.loadingText}>LOADING ...</Text>
-        </View>
-      );
+      return (<Loading backgroundColor="#3EC3D6" textColor="#FFFFFF" />);
     }
 
     return <Root />;
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#3EC3D6"
-  },
-  loadingText: {
-    textAlign: "center",
-    color: "#FFFFFF"
-  }
-});
